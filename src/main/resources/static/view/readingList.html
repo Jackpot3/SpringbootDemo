@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>readingList</title>
+    <script type="javascript" href="./js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<form action="#" id="readingList">
+    <input type="text" id="reader" value=""/><br/>
+    <input type="text" id="isbn" value=""/><br/>
+    <input type="text" id="title" value=""><br/>
+    <input type="text" id="author" value=""><br/>
+    <input type="text" id="description" value=""><br/>
+    <input type="submit" onclick="findByReader()">
+</form>
+<script>
+    function findByReader(){
+        const reader = $("#id");
+        console.log(reader)
+    }
+</script>
+</body>
+</html>
