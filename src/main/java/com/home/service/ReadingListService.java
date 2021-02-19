@@ -12,4 +12,6 @@ public interface ReadingListService {
      * @return
      */
     List<Book> findByReader(String reader);
+
+    void addBook(Book book);
 }

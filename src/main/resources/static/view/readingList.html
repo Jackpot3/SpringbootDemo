@@ -3,21 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>readingList</title>
-    <script type="javascript" href="./js/jquery-3.2.1.min.js"></script>
+    <!--<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>-->
+    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 <form action="#" id="readingList">
-    <input type="text" id="reader" value=""/><br/>
-    <input type="text" id="isbn" value=""/><br/>
-    <input type="text" id="title" value=""><br/>
-    <input type="text" id="author" value=""><br/>
-    <input type="text" id="description" value=""><br/>
-    <input type="submit" onclick="findByReader()">
+    名字 <input type="text" id="reader"/><br/>
+    是否 <input type="text" id="isbn"/><br/>
+    标题 <input type="text" id="title"><br/>
+    作者 <input type="text" id="author"><br/>
+    描述 <input type="text" id="description"><br/>
 </form>
+<input type="button" value="查书" onclick="findByReader()">
+<input type="button" value="存书" onclick="addBook()">
 <script>
-    function findByReader(){
-        const reader = $("#id");
-        console.log(reader)
+    function findByReader() {
+        const text = $("#reader").val();
+        if (text) {
+            $.get(
+                {
+                    url: "/readingList/" + text,
+                    success: function (response) {
+                        const book = response[0]
+                        if(book){
+                            $("#isbn").val(book.isbn);
+                            $("#title").val(book.title);
+                            $("#author").val(book.author);
+                            $("#description").val(book.description);
+                        }else{
+                            alert("这个人没读过书")
+                        }
+                    }
+                }
+            )
+        } else {
+            alert('请输入读者的名字')
+        }
+    }
+
+    function addBook() {
+        const book = {};
+        book.reader = $("#reader").val();
+        book.isbn = $("#isbn").val();
+        book.title = $("#title").val();
+        book.author = $("#author").val();
+        book.description = $("#description").val();
+        console.log(JSON.stringify(book));
+        $.post(
+            {
+                url: "/readingList/addBook",
+                //data: JSON.stringify(book),
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify(book),
+                success: function (response) {
+                    alert("成功");
+                }
+            }
+        )
     }
 </script>
 </body>

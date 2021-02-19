@@ -21,4 +21,8 @@ public class ReadingListServiceImpl implements ReadingListService {
     public List<Book> findByReader(String reader) {
         return readingListRepository.findByReader(reader);
     }
+
+    public void addBook(Book book) {
+        readingListRepository.save(book);
+    }
 }
