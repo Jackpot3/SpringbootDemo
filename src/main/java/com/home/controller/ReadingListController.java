@@ -3,6 +3,7 @@ package com.home.controller;
 import com.home.pojo.Book;
 import com.home.service.ReadingListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class ReadingListController {
     @Autowired
     private ReadingListService readingListService;
 
-    @RequestMapping(value = "/{reader}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{reader}")
     @ResponseBody
     public List<Book> readBooks(@PathVariable("reader") String reader) {
         return readingListService.findByReader(reader);
@@ -29,9 +30,9 @@ public class ReadingListController {
         return "readingList";
     }
 
-    @RequestMapping(value = "/addBook")
+    @RequestMapping(value = "/addBook",method = RequestMethod.POST)
     public String addBook(@RequestBody(required = false) Book book) {
-        readingListService.addBook(book);
+        //readingListService.addBook(book);
         return "readingList";
     }
 }

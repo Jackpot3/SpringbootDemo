@@ -11,8 +11,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 public class SpringMvcConfig {
 
-    /*@Bean
+    @Bean
     ViewResolver getViewResolver(){
         return new InternalResourceViewResolver();
-    }*/
+    }
 }
